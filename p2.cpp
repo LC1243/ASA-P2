@@ -2,23 +2,23 @@
 #include <vector>
 #include <algorithm>
 
-long long unsigned int V, E;
-long long unsigned int M;
+int V, E;
+int M;
 bool input = true;
 
-std::vector<std::pair<long long unsigned int, std::pair<long long unsigned int, long long unsigned int>>> train_lines;
+std::vector<std::pair<int, std::pair<int, int>>> train_lines;
 
 // <Parent, Cost>
-std::vector<std::pair<long long unsigned int, long long unsigned int>> tree;
+std::vector<std::pair<int, int>> tree;
 
 void getInput() {
-    long long unsigned int u, v, w;
-    if(scanf("%llu\n", &V) != 1)
+    int u, v, w;
+    if(scanf("%d\n", &V) != 1)
 		return;
-	if(scanf("%llu\n", &E) != 1)
+	if(scanf("%d\n", &E) != 1)
 		return;
-    for(long long unsigned int i = 0; i < E; i++) {
-        if(scanf("%llu %llu %llu", &u, &v, &w) != 3) 
+    for(int i = 0; i < E; i++) {
+        if(scanf("%d %d %d", &u, &v, &w) != 3) 
 			return;
 		//make sets
 		if(u < 1 || u > V || v < 1 || v > V)
@@ -30,13 +30,13 @@ void getInput() {
 
 // Cria a árvore
 void makeSet(){
-	for(long long unsigned int i = 0; i < V; i++){
+	for(int i = 0; i < V; i++){
 		tree.push_back(std::make_pair(i, 0) );
 	}
 }
 
-long long unsigned int findSet(long long unsigned int vertex){
-	long long unsigned int parent = tree[vertex].first;
+int findSet(int vertex){
+	int parent = tree[vertex].first;
 
 	if(vertex != parent)
 		parent = findSet(parent);
@@ -44,7 +44,7 @@ long long unsigned int findSet(long long unsigned int vertex){
 	return parent;
 }
 
-void Link(long long unsigned int u, long long unsigned int v){
+void Link(int u, int v){
 	if(tree[u].second > tree[v].second)
 		tree[v].first = u;
 
@@ -57,26 +57,26 @@ void Link(long long unsigned int u, long long unsigned int v){
 }
 
 // Encontra a união entre vértices
-void Union(long long unsigned int v1, long long unsigned int v2){
+void Union(int v1, int v2){
 	Link(findSet(v1), findSet(v2));
 }
 
 void displayTree(){
-	for(long long unsigned int i = 0; i < V; i++){
+	for(int i = 0; i < V; i++){
 		std::cout << tree[i].first << " " << tree[i].second << std::endl;
 	}
 }
 
 // Função Principal
-long long unsigned int maximizeExchanges() {
-	long long unsigned int max_exchanges = 0;
+int maximizeExchanges() {
+	int max_exchanges = 0;
 
 	makeSet();
 
 	// Sort em ordem inversa
 	std::sort(train_lines.rbegin(), train_lines.rend());
 	
-	for(long long unsigned int i = 0; i < E; i++){
+	for(int i = 0; i < E; i++){
 
 		// train_lines[i].second - Arco<u,v>
 		if( findSet(train_lines[i].second.first - 1) != findSet(train_lines[i].second.second - 1) ){
@@ -100,7 +100,7 @@ int main() {
 		return 0;
 	}
 	
-	printf("%lld\n", maximizeExchanges());
+	printf("%d\n", maximizeExchanges());
 
 	return 0;
 }
