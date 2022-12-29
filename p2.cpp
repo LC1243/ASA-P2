@@ -97,6 +97,7 @@ int main() {
 
 	if(V < 1 || E < 0 || input == false) {
 		printf("%d\n", n);
+		return 0;
 	}
 	
 	printf("%lld\n", maximizeExchanges());
