@@ -21,7 +21,7 @@ void getInput() {
         if(scanf("%llu %llu %llu", &u, &v, &w) != 3) 
 			return;
 		//make sets
-		if(u < 1 || u > V || v < 1 || u > V)
+		if(u < 1 || u > V || v < 1 || v > V)
 			input = false;
 		train_lines.push_back(std::make_pair(w, std::make_pair(u, v))); 
 
