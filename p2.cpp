@@ -71,8 +71,8 @@ void Union(int v1, int v2){
 
 
 // Função Principal
-int maximizeExchanges() {
-	int max_exchanges = 0;
+long long unsigned maximizeExchanges() {
+	long long unsigned max_exchanges = 0;
 
 	makeSet();
 
@@ -107,7 +107,7 @@ int main() {
 		return 0;
 	}
 	
-	printf("%d\n", maximizeExchanges());
+	printf("%llu\n", maximizeExchanges());
 
 	return 0;
 }
